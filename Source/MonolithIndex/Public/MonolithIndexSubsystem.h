@@ -24,6 +24,7 @@ public:
 	virtual void Deinitialize() override;
 
 	/** Trigger a full re-index (wipes DB, re-scans everything) */
+	UFUNCTION()
 	void StartFullIndex();
 
 	/** Is indexing currently in progress? */

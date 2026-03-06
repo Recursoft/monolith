@@ -238,7 +238,7 @@ FMonolithActionResult FMonolithCoreTools::HandleReindex(const TSharedPtr<FJsonOb
 		UEditorSubsystem* IndexSubsystem = GEditor->GetEditorSubsystemBase(IndexSubsystemClass);
 		if (IndexSubsystem)
 		{
-			UFunction* RebuildFunc = IndexSubsystemClass->FindFunctionByName(TEXT("RebuildIndex"));
+			UFunction* RebuildFunc = IndexSubsystemClass->FindFunctionByName(TEXT("StartFullIndex"));
 			if (RebuildFunc)
 			{
 				IndexSubsystem->ProcessEvent(RebuildFunc, nullptr);

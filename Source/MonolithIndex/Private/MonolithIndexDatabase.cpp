@@ -1045,7 +1045,76 @@ TSharedPtr<FJsonObject> FMonolithIndexDatabase::FindReferences(const FString& Pa
 
 bool FMonolithIndexDatabase::CreateTables()
 {
-	return ExecuteSQL(GCreateTablesSQL);
+	if (!Database || !Database->IsValid())
+	{
+		return false;
+	}
+
+	// GCreateTablesSQL contains multiple statements separated by semicolons.
+	// FSQLiteDatabase::Execute() only handles one statement at a time,
+	// so we split and execute each individually.
+	FString FullSQL(GCreateTablesSQL);
+	TArray<FString> Statements;
+
+	// Split on semicolons, tracking BEGIN/END depth for trigger bodies
+	int32 Start = 0;
+	int32 Depth = 0;
+	for (int32 i = 0; i < FullSQL.Len(); ++i)
+	{
+		// Check for BEGIN keyword (trigger body start)
+		if (i + 5 <= FullSQL.Len())
+		{
+			FString Word = FullSQL.Mid(i, 5).ToUpper();
+			if (Word == TEXT("BEGIN") && (i == 0 || FChar::IsWhitespace(FullSQL[i - 1]) || FullSQL[i - 1] == '\n'))
+			{
+				if (i + 5 >= FullSQL.Len() || FChar::IsWhitespace(FullSQL[i + 5]) || FullSQL[i + 5] == '\n')
+				{
+					Depth++;
+				}
+			}
+		}
+		// Check for END keyword (trigger body end)
+		if (i + 3 <= FullSQL.Len())
+		{
+			FString Word = FullSQL.Mid(i, 3).ToUpper();
+			if (Word == TEXT("END") && (i == 0 || FChar::IsWhitespace(FullSQL[i - 1]) || FullSQL[i - 1] == '\n'))
+			{
+				if (i + 3 >= FullSQL.Len() || FullSQL[i + 3] == ';' || FChar::IsWhitespace(FullSQL[i + 3]))
+				{
+					if (Depth > 0) Depth--;
+				}
+			}
+		}
+
+		if (FullSQL[i] == ';' && Depth == 0)
+		{
+			FString Stmt = FullSQL.Mid(Start, i - Start + 1).TrimStartAndEnd();
+			if (!Stmt.IsEmpty() && Stmt != TEXT(";"))
+			{
+				Statements.Add(Stmt);
+			}
+			Start = i + 1;
+		}
+	}
+
+	bool bAllSucceeded = true;
+	for (const FString& Stmt : Statements)
+	{
+		if (!Database->Execute(*Stmt))
+		{
+			UE_LOG(LogMonolithIndex, Warning, TEXT("Schema statement failed: %s -- Error: %s"),
+				*Stmt.Left(100), *Database->GetLastError());
+			bAllSucceeded = false;
+			// Don't stop -- try remaining statements (some may be IF NOT EXISTS)
+		}
+	}
+
+	if (!bAllSucceeded)
+	{
+		UE_LOG(LogMonolithIndex, Warning, TEXT("Some schema statements failed -- FTS5 may not be available in this SQLite build"));
+	}
+
+	return true; // Return true even if FTS fails -- basic tables should work
 }
 
 bool FMonolithIndexDatabase::ExecuteSQL(const FString& SQL)

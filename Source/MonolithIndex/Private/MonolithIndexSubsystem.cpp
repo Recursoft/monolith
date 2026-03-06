@@ -241,32 +241,10 @@ uint32 UMonolithIndexSubsystem::FIndexingTask::Run()
 			continue;
 		}
 
-		// Find the right indexer for this asset class
-		FString ClassName = IndexedAsset.AssetClass;
-		TSharedPtr<IMonolithIndexer>* FoundIndexer = Owner->ClassToIndexer.Find(ClassName);
-
-		if (FoundIndexer && FoundIndexer->IsValid())
-		{
-			// Load the asset on the game thread for deep inspection
-			UObject* LoadedAsset = nullptr;
-
-			FEvent* LoadEvent = FPlatformProcess::GetSynchEventFromPool(true);
-			AsyncTask(ENamedThreads::GameThread, [&]()
-			{
-				LoadedAsset = AssetData.GetAsset();
-				LoadEvent->Trigger();
-			});
-			LoadEvent->Wait();
-			FPlatformProcess::ReturnSynchEventToPool(LoadEvent);
-
-			if (LoadedAsset)
-			{
-				if (!(*FoundIndexer)->IndexAsset(AssetData, LoadedAsset, *DB, AssetId))
-				{
-					Errors++;
-				}
-			}
-		}
+		// NOTE: Deep asset loading (Blueprint graphs, Material nodes) is skipped during bulk indexing.
+		// Loading assets triggers the texture compiler pipeline which crashes when called from
+		// a background thread context. Metadata-only indexing (name, class, path, dependencies)
+		// is sufficient for FTS search. Deep inspection can be done on-demand per asset.
 
 		Indexed++;
 
