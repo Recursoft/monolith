@@ -388,13 +388,27 @@ Precompiled binaries are included in every release — building from source is o
 
 ## Auto-Updater
 
-Monolith checks for new versions on editor startup so you don't have to babysit GitHub.
+Monolith can check for new versions on editor startup so you don't have to babysit GitHub. **Off by default** as of v0.14.6 — opt in if you want it.
 
-1. **On editor startup** — Checks GitHub Releases for a newer version
-2. **Downloads and stages** — If an update is found, it downloads and stages the new version
-3. **Auto-swaps on exit** — The plugin is replaced when you close the editor
-4. **Manual check** — `monolith_update` tool to check anytime
-5. **Disable** — Toggle off in **Editor Preferences > Plugins > Monolith**
+1. **Opt in** — Tick **Auto Update Enabled** in Editor Preferences > Plugins > Monolith
+2. **On editor startup** — Checks GitHub Releases for a newer version
+3. **Downloads and verifies** — If an update is found, it downloads the zip and verifies the SHA256 hash against the `Monolith-SHA256:` marker in the release notes. Mismatch aborts the install.
+4. **Auto-swaps on exit** — The plugin is replaced when you close the editor (after a Y/N prompt in the swap script)
+5. **Manual check** — `monolith_update` tool to check anytime
+6. **Releases without a SHA256 marker** — log a warning and proceed without integrity check (legacy releases do not have markers; future-only releases will hard-fail without one)
+
+---
+
+## Network Exposure
+
+Monolith starts a local HTTP server on port 9316 to receive MCP traffic from AI assistants. UE's `FHttpServerModule` does **not** expose a bind-address parameter, so the listener is reachable on all network interfaces, not just `127.0.0.1`. CORS is restricted to localhost origins (`http(s)://localhost`, `127.0.0.1`, `[::1]`), which blocks browser-based cross-origin reads, but does **not** block direct HTTP requests from other devices on the same LAN.
+
+If you work on an untrusted network, choose one of:
+
+- **Add a Windows Firewall rule** blocking inbound TCP on port 9316 from non-loopback addresses, OR
+- **Disable the server** by unticking **MCP Server Enabled** in Editor Preferences > Plugins > Monolith and restarting the editor.
+
+See [SECURITY.md](SECURITY.md) for the full threat model and disclosure policy.
 
 ---
 
