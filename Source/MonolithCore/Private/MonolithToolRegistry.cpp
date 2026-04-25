@@ -97,6 +97,9 @@ FMonolithActionResult FMonolithToolRegistry::ExecuteAction(
 				(*ParamDef)->TryGetBoolField(TEXT("required"), bRequired);
 				if (bRequired && !Params->HasField(Pair.Key))
 				{
+					// wbp_path / asset_path aliasing: accept asset_path as substitute for wbp_path
+					if (Pair.Key == TEXT("wbp_path") && Params->HasField(TEXT("asset_path")))
+						continue;
 					Missing.Add(Pair.Key);
 				}
 			}

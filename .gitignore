@@ -23,9 +23,8 @@ Docs/ROADMAP.md
 Docs/research/
 Docs/specs/
 
-# CommonUI WIP — not shipped until WITH_COMMONUI goes public
-Source/MonolithUI/Private/CommonUI/
-Source/MonolithUI/Public/CommonUI/
+# CommonUI shipped M0.5 (v0.14.0, 2026-04-19) — tracked in git
+# Conditional on WITH_COMMONUI; MONOLITH_RELEASE_BUILD=1 compiles it out
 
 # Build tools and proxy binaries — local to dev machine
 Tools/

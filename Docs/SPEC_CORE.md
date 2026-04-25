@@ -12,7 +12,7 @@
 
 ## 1. Overview
 
-Monolith is a unified Unreal Engine editor plugin that consolidates 9 separate MCP (Model Context Protocol) servers and 4 C++ plugins into a single plugin with an embedded HTTP MCP server. It reduces ~220 individual tools down to 19 MCP tools (1227 total actions across 16 domains; 1182 active by default — 45 experimental town gen actions disabled), cutting AI assistant context consumption by ~95%. A CommonUI action pack (~50 actions, conditional on `WITH_COMMONUI`) is planned for a future release.
+Monolith is a unified Unreal Engine editor plugin that consolidates 9 separate MCP (Model Context Protocol) servers and 4 C++ plugins into a single plugin with an embedded HTTP MCP server. It reduces ~220 individual tools down to 19 MCP tools (1277 total actions across 16 domains; 1232 active by default — 45 experimental town gen actions disabled), cutting AI assistant context consumption by ~95%. The CommonUI action pack (50 actions, conditional on `WITH_COMMONUI`) shipped M0.5, v0.14.0 (2026-04-19), tested M0.5.1 (2026-04-25).
 
 ### What It Replaces
 
@@ -43,7 +43,7 @@ Monolith.uplugin
   MonolithConfig        — Config/INI resolution and search (6 actions)
   MonolithIndex         — SQLite FTS5 deep project indexer, 14 internal indexers (7 MCP actions)
   MonolithSource        — Engine source + API lookup (11 actions)
-  MonolithUI            — Widget blueprint CRUD, templates, styling, animation, settings scaffolding, accessibility (42 UMG actions). A CommonUI action pack (activatable widgets, buttons+styling, input glyphs, focus/nav, lists/tabs, dialogs, audit/lint, accessibility) is planned for a future release.
+  MonolithUI            — Widget blueprint CRUD, templates, styling, animation, settings scaffolding, accessibility (42 UMG + 50 CommonUI = 92 actions). CommonUI actions conditional on #if WITH_COMMONUI. Shipped M0.5, v0.14.0 (2026-04-19)
   MonolithMesh          — Mesh inspection, scene manipulation, spatial queries, level blockout, GeometryScript ops, horror/accessibility, lighting, audio/acoustics, performance, decals, level design, tech art, context props, procedural geometry (sweep walls, auto-collision, proc mesh caching, blueprint prefabs), genre presets, encounter design, accessibility reports (197 core actions) + EXPERIMENTAL procedural town generator (45 actions, disabled by default via bEnableProceduralTownGen) = 242 total
   MonolithGAS           — Gameplay Ability System integration: abilities, attributes, effects, ASC, tags, cues, targets, input, inspection, scaffolding (130 actions). Conditional on #if WITH_GBA
   MonolithComboGraph    — ComboGraph plugin integration: combo graph CRUD, node/edge management, effects, cues, ability scaffolding (13 actions). Conditional on #if WITH_COMBOGRAPH
@@ -61,7 +61,7 @@ For the architectural pattern that lets you write your own sibling plugin and re
 
 ### Discovery/Dispatch Pattern
 
-All domain modules register actions with `FMonolithToolRegistry` (central singleton). Each domain exposes a single `{namespace}_query(action, params)` MCP tool. The 4 core tools (`monolith_discover`, `monolith_status`, `monolith_reindex`, `monolith_update`) are standalone. Conditional modules gate registration on compile-time defines: MonolithGAS (`#if WITH_GBA`), MonolithComboGraph (`#if WITH_COMBOGRAPH`), MonolithLogicDriver (`#if WITH_LOGICDRIVER`), MonolithAI (`#if WITH_STATETREE` + `#if WITH_SMARTOBJECTS` required; `#if WITH_MASSENTITY` + `#if WITH_ZONEGRAPH` optional), MonolithAudio (MetaSound actions conditional on `#if WITH_METASOUND`).
+All domain modules register actions with `FMonolithToolRegistry` (central singleton). Each domain exposes a single `{namespace}_query(action, params)` MCP tool. The 4 core tools (`monolith_discover`, `monolith_status`, `monolith_reindex`, `monolith_update`) are standalone. Conditional modules gate registration on compile-time defines: MonolithGAS (`#if WITH_GBA`), MonolithComboGraph (`#if WITH_COMBOGRAPH`), MonolithLogicDriver (`#if WITH_LOGICDRIVER`), MonolithUI CommonUI actions (`#if WITH_COMMONUI`), MonolithAI (`#if WITH_STATETREE` + `#if WITH_SMARTOBJECTS` required; `#if WITH_MASSENTITY` + `#if WITH_ZONEGRAPH` optional), MonolithAudio (MetaSound actions conditional on `#if WITH_METASOUND`).
 
 ### MCP Protocol
 
@@ -107,6 +107,7 @@ Modules that probe for optional plugins follow a unified Build.cs convention: 3-
 | MonolithComboGraph | ComboGraph | `WITH_COMBOGRAPH` | `MonolithComboGraph.Build.cs` | (existing) |
 | MonolithLogicDriver | Logic Driver Pro | `WITH_LOGICDRIVER` | `MonolithLogicDriver.Build.cs` | (existing) |
 | MonolithAudio | MetaSound | `WITH_METASOUND` | `MonolithAudio.Build.cs` | (existing) |
+| MonolithUI | CommonUI | `WITH_COMMONUI` | `MonolithUI.Build.cs` | **v0.14.0** (M0.5) |
 | MonolithAI | StateTree, SmartObjects | `WITH_STATETREE`, `WITH_SMARTOBJECTS` (required); `WITH_MASSENTITY`, `WITH_ZONEGRAPH` (optional) | `MonolithAI.Build.cs` | (existing) |
 
 ---
@@ -126,7 +127,7 @@ Each module has its own spec file under `specs/`. The table below is the index.
 | 3.7 | MonolithConfig | [specs/SPEC_MonolithConfig.md](specs/SPEC_MonolithConfig.md) | Config/INI resolution and search (6 actions) |
 | 3.8 | MonolithIndex | [specs/SPEC_MonolithIndex.md](specs/SPEC_MonolithIndex.md) | SQLite FTS5 deep project indexer (7 MCP actions, 14 internal indexers) |
 | 3.9 | MonolithSource | [specs/SPEC_MonolithSource.md](specs/SPEC_MonolithSource.md) | Engine source + API lookup (11 actions) |
-| 3.10 | MonolithUI | [specs/SPEC_MonolithUI.md](specs/SPEC_MonolithUI.md) | Widget blueprint CRUD, templates, styling, accessibility (42 UMG actions; CommonUI pack planned) |
+| 3.10 | MonolithUI | [specs/SPEC_MonolithUI.md](specs/SPEC_MonolithUI.md) | Widget blueprint CRUD, templates, styling, accessibility, CommonUI activatables/buttons/input/focus/lists/dialogs/audit/a11y (92 actions: 42 UMG + 50 CommonUI) |
 | 3.11 | MonolithMesh | [specs/SPEC_MonolithMesh.md](specs/SPEC_MonolithMesh.md) | Mesh/scene/spatial/blockout/GeometryScript/procedural (197 core + 45 experimental town gen = 242 actions) |
 | 3.12 | MonolithBABridge | [specs/SPEC_MonolithBABridge.md](specs/SPEC_MonolithBABridge.md) | IModularFeatures bridge for Blueprint Assist (0 MCP actions, integration only) |
 | 3.13 | MonolithGAS | [specs/SPEC_MonolithGAS.md](specs/SPEC_MonolithGAS.md) | Gameplay Ability System integration (130 actions, WITH_GBA) |
@@ -268,7 +269,7 @@ python Saved/monolith_offline.py <namespace> <action> [args...]
 | unreal-niagara | Niagara, particle, VFX, emitter | `niagara_query()` | 96 |
 | unreal-performance | performance, optimization, FPS, frame time | Cross-domain | config + material + niagara |
 | unreal-project-search | find asset, search project, dependencies | `project_query()` | 7 |
-| unreal-ui | UI, HUD, widget, menu, settings, save game, accessibility, font, toast, dialog | `ui_query()` | 42 |
+| unreal-ui | UI, HUD, widget, menu, settings, save game, accessibility, CommonUI, activatable, button style, input glyph, focus | `ui_query()` | 92 |
 
 All skills follow a common structure: YAML frontmatter, Discovery section, Asset Path Conventions table, action tables, workflow examples, and rules.
 
@@ -363,7 +364,7 @@ YourProject/Plugins/Monolith/
     MonolithConfig/                (4 source files)
     MonolithIndex/                 (12+ source files)
     MonolithSource/                (8 source files)
-    MonolithUI/                    (17 source files — 9 .cpp + 8 .h)
+    MonolithUI/                    (17+ source files — UMG baseline + CommonUI categories A-I, conditional on WITH_COMMONUI)
     MonolithGAS/                   (conditional on WITH_GBA — abilities, attributes, effects, ASC, tags, cues, targets, input, inspect, scaffold)
     MonolithComboGraph/            (conditional on WITH_COMBOGRAPH — combo graph CRUD, nodes, edges, effects, cues, ability scaffolding)
     MonolithAI/                    (conditional on WITH_STATETREE + WITH_SMARTOBJECTS — BT, BB, ST, EQS, SO, Controllers, Perception, Navigation, Runtime, Scaffolds)
@@ -450,16 +451,16 @@ See `TODO.md` for the full list. Key architectural constraints:
 | MonolithConfig | config | 6 |
 | MonolithIndex | project | 7 |
 | MonolithSource | source | 11 |
-| MonolithUI | ui | 42 |
+| MonolithUI | ui | 92 (42 UMG + 50 CommonUI) |
 | MonolithGAS | gas | 130 |
 | MonolithComboGraph | combograph | 13 |
 | MonolithAI | ai | 229 |
 | MonolithLogicDriver | logicdriver | 66 |
 | MonolithAudio | audio | 81 |
 | MonolithBABridge | — | 0 (integration only) |
-| **Total** | | **1227** (1182 active by default) |
+| **Total** | | **1277** (1232 active by default) |
 
-**Note:** MonolithMesh includes 197 core actions (always registered) plus 45 experimental Procedural Town Generator actions (registered only when `bEnableProceduralTownGen = true`, default: false — known geometry issues). MonolithGAS is conditional on `#if WITH_GBA` — projects without GameplayAbilities register 0 GAS actions. MonolithComboGraph is conditional on `#if WITH_COMBOGRAPH` — projects without the ComboGraph plugin register 0 combograph actions. MonolithAI is conditional on `#if WITH_STATETREE` + `#if WITH_SMARTOBJECTS` — projects without these register 0 AI actions. MonolithLogicDriver is conditional on `#if WITH_LOGICDRIVER` — projects without Logic Driver Pro register 0 logicdriver actions. MonolithAudio MetaSound actions are conditional on `#if WITH_METASOUND` — projects without MetaSound get Sound Cue + CRUD + batch actions but no MetaSound graph building. MonolithBABridge registers no MCP actions — it only provides the `IMonolithGraphFormatter` IModularFeatures bridge consumed by `auto_layout` in the blueprint, material, animation, and niagara modules. The original Python server had higher tool counts (~231 tools) due to fragmented action design — Monolith consolidates these into 19 MCP tools with namespaced actions.
+**Note:** MonolithMesh includes 197 core actions (always registered) plus 45 experimental Procedural Town Generator actions (registered only when `bEnableProceduralTownGen = true`, default: false — known geometry issues). MonolithGAS is conditional on `#if WITH_GBA` — projects without GameplayAbilities register 0 GAS actions. MonolithComboGraph is conditional on `#if WITH_COMBOGRAPH` — projects without the ComboGraph plugin register 0 combograph actions. MonolithAI is conditional on `#if WITH_STATETREE` + `#if WITH_SMARTOBJECTS` — projects without these register 0 AI actions. MonolithLogicDriver is conditional on `#if WITH_LOGICDRIVER` — projects without Logic Driver Pro register 0 logicdriver actions. MonolithAudio MetaSound actions are conditional on `#if WITH_METASOUND` — projects without MetaSound get Sound Cue + CRUD + batch actions but no MetaSound graph building. MonolithUI includes 42 UMG baseline actions (always registered) plus 50 CommonUI actions (registered only when `WITH_COMMONUI=1` — projects without CommonUI register 42 UI actions). MonolithBABridge registers no MCP actions — it only provides the `IMonolithGraphFormatter` IModularFeatures bridge consumed by `auto_layout` in the blueprint, material, animation, and niagara modules. The original Python server had higher tool counts (~231 tools) due to fragmented action design — Monolith consolidates these into 19 MCP tools with namespaced actions.
 
 ---
 
