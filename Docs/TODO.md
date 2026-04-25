@@ -38,7 +38,7 @@ Last updated: 2026-04-25 (v0.14.3)
 - [x] Infrastructure collateral: `MonolithIndexLog.h` moved Private → Public (transitive include bug exposed)
 - [x] Version bump 0.13.2 → 0.14.0 in both `Monolith.uplugin` and `MonolithCoreModule.h`
 
-#### MonolithUI M0.5.1 — Testing (Partially Complete)
+#### MonolithUI M0.5.1 — Testing Complete (2026-04-25)
 
 - [x] **Functional testing** — DONE (2026-04-25). 50/50 editor-time actions PASS across 9 categories (A/B/C/D/E/F/G/H/I). 0 crashes. 8 bugs found and fixed during testing:
   - `configure_rotator` null deref crash → reflection-based accessor (P0)
@@ -49,8 +49,8 @@ Last updated: 2026-04-25 (v0.14.3)
   - Registry-level `wbp_path`/`asset_path` alias → MonolithToolRegistry.cpp
   - `convert_button_to_common` transient default class → persistent Blueprint at `/Game/Monolith/CommonUI/`
   - `set_activatable_transition` description ambiguity → clarified "(stack/container only)"
+- [x] **Runtime action PIE testing** — DONE (2026-04-25). 11/11 runtime actions PASS in PIE. Input override round-trip verified (M&K→Gamepad→M&K). Focus path returns 39-node Slate hierarchy. All error paths for missing containers/widgets return clean descriptive errors. 0 crashes.
 - [ ] **Conditional compilation test** — re-verify clean compile with `MONOLITH_RELEASE_BUILD=1` env var (WITH_COMMONUI=0 path).
-- [ ] **Runtime action PIE testing** — 11 actions marked [RUNTIME] need PIE-session validation (push/pop/get_state, force_focus, get_focus_path, request_refresh_focus, register_tab, create_button_group, get/set_input_type, show_common_message, hot_reload_styles, dump_action_router_state).
 - [ ] **Bridge integration test** — author a minimal main menu WBP via the new actions end-to-end (keystone test for Claude Design bridge M1).
 
 #### MonolithUI M0.5 — Known Limitations (shipped, documented)
