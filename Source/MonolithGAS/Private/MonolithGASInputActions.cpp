@@ -15,6 +15,7 @@
 #include "EdGraph/EdGraph.h"
 #include "EdGraph/EdGraphNode.h"
 #include "Misc/FileHelper.h"
+#include "Misc/App.h"
 #include "HAL/PlatformFileManager.h"
 
 

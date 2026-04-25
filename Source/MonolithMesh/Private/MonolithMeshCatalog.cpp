@@ -2,6 +2,7 @@
 #include "MonolithIndexDatabase.h"
 #include "SQLiteDatabase.h"
 #include "Dom/JsonValue.h"
+#include "Misc/Paths.h"
 
 bool FMonolithMeshCatalog::CreateTable(FSQLiteDatabase& DB)
 {

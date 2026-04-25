@@ -42,6 +42,7 @@
 #include "IAssetTools.h"
 
 // Asset registry & utilities
+#include "AssetRegistry/AssetData.h"
 #include "AssetRegistry/IAssetRegistry.h"
 #include "AssetRegistry/AssetRegistryModule.h"
 #include "UObject/SavePackage.h"

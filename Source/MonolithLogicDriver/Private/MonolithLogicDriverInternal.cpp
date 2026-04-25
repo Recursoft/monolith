@@ -9,7 +9,12 @@
 #include "Kismet2/KismetEditorUtilities.h"
 #include "Dom/JsonObject.h"
 #include "Dom/JsonValue.h"
+#include "AssetRegistry/AssetData.h"
 #include "AssetRegistry/AssetRegistryModule.h"
+#include "AssetRegistry/IAssetRegistry.h"
+#include "Modules/ModuleManager.h"
+#include "UObject/UnrealType.h"
+#include "UObject/UObjectGlobals.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogMonolithLDInternal, Log, All);
 

@@ -26,6 +26,7 @@
 #include "Kismet2/BlueprintEditorUtils.h"
 #include "Editor.h"
 #include "ScopedTransaction.h"
+#include "Misc/ConfigCacheIni.h"
 
 // ============================================================
 //  Registration

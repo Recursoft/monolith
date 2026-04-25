@@ -1,7 +1,11 @@
 #include "Indexers/DataAssetIndexer.h"
+#include "AssetRegistry/AssetData.h"
+#include "Engine/DataAsset.h"
 #include "UObject/UnrealType.h"
+#include "UObject/TextProperty.h"
 #include "Serialization/JsonWriter.h"
 #include "Serialization/JsonSerializer.h"
+#include "Policies/CondensedJsonPrintPolicy.h"
 
 bool FDataAssetIndexer::IndexAsset(const FAssetData& AssetData, UObject* LoadedAsset, FMonolithIndexDatabase& DB, int64 AssetId)
 {

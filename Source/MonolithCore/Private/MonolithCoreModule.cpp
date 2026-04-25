@@ -5,9 +5,16 @@
 #include "MonolithToolRegistry.h"
 #include "MonolithCoreTools.h"
 #include "Misc/FileHelper.h"
+#include "Misc/Paths.h"
+#include "HAL/PlatformFileManager.h"
 #include "GenericPlatform/GenericPlatformProcess.h"
+#include "GenericPlatform/GenericPlatformFile.h"
 #include "Interfaces/IPluginManager.h"
 #include "HAL/IConsoleManager.h"
+#include "Dom/JsonObject.h"
+#include "Serialization/JsonWriter.h"
+#include "Serialization/JsonSerializer.h"
+#include "Policies/CondensedJsonPrintPolicy.h"
 
 #define LOCTEXT_NAMESPACE "FMonolithCoreModule"
 

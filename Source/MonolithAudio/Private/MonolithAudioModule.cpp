@@ -9,6 +9,7 @@
 #if WITH_METASOUND
 #include "MonolithAudioMetaSoundActions.h"
 #endif
+#include "Modules/ModuleManager.h"
 
 void FMonolithAudioModule::StartupModule()
 {

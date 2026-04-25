@@ -26,6 +26,7 @@
 #include "ScopedTransaction.h"
 #include "StructUtils/InstancedStruct.h"
 #include "Editor.h"
+#include "EdGraph/EdGraph.h"
 #include "IMonolithGraphFormatter.h"
 
 // ============================================================

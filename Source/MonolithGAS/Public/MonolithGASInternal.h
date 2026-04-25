@@ -5,6 +5,7 @@
 #include "Dom/JsonObject.h"
 #include "Dom/JsonValue.h"
 #include "Serialization/JsonSerializer.h"
+#include "Engine/Blueprint.h"
 #include "GameplayAbilitySpec.h"
 #include "GameplayEffect.h"
 #include "AbilitySystemComponent.h"

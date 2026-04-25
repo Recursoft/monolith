@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Dom/JsonObject.h"
 #include "Dom/JsonValue.h"
+#include "Engine/EngineTypes.h"
 
 /**
  * Shared parameter parsing utilities for Monolith action handlers.

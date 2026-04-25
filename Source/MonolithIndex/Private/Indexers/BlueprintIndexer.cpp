@@ -1,4 +1,5 @@
 #include "Indexers/BlueprintIndexer.h"
+#include "AssetRegistry/AssetData.h"
 #include "Engine/Blueprint.h"
 #include "EdGraph/EdGraph.h"
 #include "EdGraph/EdGraphNode.h"
@@ -11,6 +12,7 @@
 #include "K2Node_VariableSet.h"
 #include "Serialization/JsonWriter.h"
 #include "Serialization/JsonSerializer.h"
+#include "Policies/CondensedJsonPrintPolicy.h"
 
 bool FBlueprintIndexer::IndexAsset(const FAssetData& AssetData, UObject* LoadedAsset, FMonolithIndexDatabase& DB, int64 AssetId)
 {

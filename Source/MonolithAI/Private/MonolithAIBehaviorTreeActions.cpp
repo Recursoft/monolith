@@ -40,6 +40,8 @@
 #include "UObject/Package.h"
 #include "UObject/SavePackage.h"
 #include "UObject/UObjectIterator.h"
+#include "UObject/UnrealType.h"
+#include "UObject/TextProperty.h"
 #include "ScopedTransaction.h"
 #include "IMonolithGraphFormatter.h"
 #include "Kismet2/KismetEditorUtilities.h"

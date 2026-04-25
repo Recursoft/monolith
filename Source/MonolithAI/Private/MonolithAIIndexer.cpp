@@ -1,5 +1,6 @@
 #include "MonolithAIIndexer.h"
 #include "MonolithSettings.h"
+#include "AssetRegistry/AssetData.h"
 #include "AssetRegistry/AssetRegistryModule.h"
 #include "AssetRegistry/IAssetRegistry.h"
 #include "Engine/Blueprint.h"
@@ -13,6 +14,7 @@
 #include "Perception/AIPerceptionComponent.h"
 #include "Serialization/JsonWriter.h"
 #include "Serialization/JsonSerializer.h"
+#include "Policies/CondensedJsonPrintPolicy.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogAIIndexer, Log, All);
 

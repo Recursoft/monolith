@@ -13,6 +13,7 @@
 #include "Sound/SoundMix.h"
 #include "Sound/AudioSettings.h"
 
+#include "AssetRegistry/AssetData.h"
 #include "AssetRegistry/AssetRegistryModule.h"
 #include "AssetRegistry/IAssetRegistry.h"
 #include "Dom/JsonObject.h"

@@ -7,6 +7,8 @@
 #include "Misc/CoreDelegates.h"
 #include "MonolithUpdateSubsystem.generated.h"
 
+class SWindow;
+
 struct FMonolithVersionInfo
 {
 	FString Current;

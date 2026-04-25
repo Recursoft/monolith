@@ -25,6 +25,7 @@
 #include "MetasoundEditorSubsystem.h"
 
 // Engine
+#include "AssetRegistry/AssetData.h"
 #include "AssetRegistry/IAssetRegistry.h"
 #include "AssetRegistry/AssetRegistryModule.h"
 #include "Sound/SoundWave.h"

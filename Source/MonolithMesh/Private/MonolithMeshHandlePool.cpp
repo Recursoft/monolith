@@ -20,6 +20,7 @@ TSharedPtr<FJsonObject> UMonolithMeshHandlePool::ListHandles() const { return Ma
 
 #include "Engine/StaticMesh.h"
 #include "StaticMeshAttributes.h"
+#include "StaticMeshResources.h"
 #include "AssetRegistry/AssetRegistryModule.h"
 #include "UObject/Package.h"
 #include "UObject/SavePackage.h"

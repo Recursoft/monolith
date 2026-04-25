@@ -10,6 +10,7 @@
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
 #include "HAL/PlatformFileManager.h"
+#include "Containers/Queue.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogSpatialRegistry, Log, All);
 

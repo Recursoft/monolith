@@ -3,9 +3,12 @@
 #include "MonolithMemoryHelper.h"
 #include "MonolithSettings.h"
 #include "Engine/StaticMesh.h"
+#include "AssetRegistry/AssetData.h"
 #include "AssetRegistry/AssetRegistryModule.h"
 #include "AssetRegistry/IAssetRegistry.h"
 #include "SQLiteDatabase.h"
+#include "StaticMeshResources.h"
+#include "Misc/Paths.h"
 
 bool FMeshCatalogIndexer::IndexAsset(const FAssetData& AssetData, UObject* LoadedAsset, FMonolithIndexDatabase& DB, int64 AssetId)
 {

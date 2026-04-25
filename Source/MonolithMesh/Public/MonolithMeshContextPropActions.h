@@ -1,7 +1,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Math/RandomStream.h"
 #include "MonolithToolRegistry.h"
+
+class AActor;
 
 /**
  * Phase 18: Context-Aware Prop Placement (8 actions)

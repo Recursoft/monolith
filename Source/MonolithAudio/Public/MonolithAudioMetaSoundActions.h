@@ -4,6 +4,8 @@
 
 #if WITH_METASOUND
 
+class FJsonObject;
+class FJsonValue;
 class FMonolithToolRegistry;
 struct FMonolithActionResult;
 

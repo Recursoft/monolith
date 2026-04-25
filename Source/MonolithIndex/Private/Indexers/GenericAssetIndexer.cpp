@@ -1,4 +1,5 @@
 #include "Indexers/GenericAssetIndexer.h"
+#include "AssetRegistry/AssetData.h"
 #include "Engine/StaticMesh.h"
 #include "Engine/SkeletalMesh.h"
 #include "Engine/Texture2D.h"
@@ -6,8 +7,11 @@
 #include "Sound/SoundWave.h"
 #include "Sound/SoundCue.h"
 #include "PhysicsEngine/PhysicsAsset.h"
+#include "StaticMeshResources.h"
+#include "Animation/Skeleton.h"
 #include "Serialization/JsonWriter.h"
 #include "Serialization/JsonSerializer.h"
+#include "Policies/CondensedJsonPrintPolicy.h"
 
 bool FGenericAssetIndexer::IndexAsset(const FAssetData& AssetData, UObject* LoadedAsset, FMonolithIndexDatabase& DB, int64 AssetId)
 {

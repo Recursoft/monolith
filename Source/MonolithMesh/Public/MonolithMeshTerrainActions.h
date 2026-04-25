@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine/EngineTypes.h"
 #include "MonolithToolRegistry.h"
 
 #if WITH_GEOMETRYSCRIPT

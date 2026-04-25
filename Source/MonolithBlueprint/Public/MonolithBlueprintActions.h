@@ -3,6 +3,9 @@
 #include "CoreMinimal.h"
 #include "MonolithToolRegistry.h"
 
+class FJsonObject;
+class UBlueprint;
+
 class FMonolithBlueprintActions
 {
 public:

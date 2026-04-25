@@ -11,6 +11,7 @@
 #include "MonolithGASInputActions.h"
 #include "MonolithGASInspectActions.h"
 #include "MonolithGASScaffoldActions.h"
+#include "Modules/ModuleManager.h"
 
 DEFINE_LOG_CATEGORY(LogMonolithGAS);
 

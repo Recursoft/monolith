@@ -1,6 +1,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine/EngineTypes.h"
+#include "Engine/HitResult.h"
 #include "MonolithToolRegistry.h"
 
 /**

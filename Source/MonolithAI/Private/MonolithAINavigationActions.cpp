@@ -24,6 +24,7 @@
 #include "UObject/Package.h"
 #include "UObject/SavePackage.h"
 #include "UObject/UObjectGlobals.h"
+#include "UObject/UObjectIterator.h"
 #include "Kismet2/BlueprintEditorUtils.h"
 #include "AssetRegistry/AssetRegistryModule.h"
 #include "Builders/CubeBuilder.h"

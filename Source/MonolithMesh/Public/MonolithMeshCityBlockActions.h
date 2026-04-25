@@ -1,6 +1,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Math/RandomStream.h"
+#include "Dom/JsonObject.h"
 #include "MonolithToolRegistry.h"
 
 #if WITH_GEOMETRYSCRIPT

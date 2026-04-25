@@ -3,6 +3,8 @@
 #include "Dom/JsonObject.h"
 #include "Dom/JsonValue.h"
 #include "Serialization/JsonSerializer.h"
+#include "Serialization/JsonWriter.h"
+#include "Policies/CondensedJsonPrintPolicy.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
 #include "Misc/SecureHash.h"

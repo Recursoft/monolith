@@ -7,6 +7,8 @@
 #include "Engine/SimpleConstructionScript.h"
 #include "Engine/SCS_Node.h"
 #include "Components/SceneComponent.h"
+#include "EdGraph/EdGraph.h"
+#include "Engine/Blueprint.h"
 #include "Kismet2/BlueprintEditorUtils.h"
 #include "UObject/Class.h"
 #include "UObject/UObjectIterator.h"

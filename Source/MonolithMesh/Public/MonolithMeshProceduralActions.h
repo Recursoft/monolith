@@ -5,6 +5,7 @@
 
 #if WITH_GEOMETRYSCRIPT
 
+class AActor;
 class UMonolithMeshHandlePool;
 class UDynamicMesh;
 

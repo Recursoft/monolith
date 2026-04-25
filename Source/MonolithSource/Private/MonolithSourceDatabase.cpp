@@ -3,6 +3,7 @@
 #include "SQLiteDatabase.h"
 #include "Misc/Paths.h"
 #include "HAL/PlatformFileManager.h"
+#include "GenericPlatform/GenericPlatformFile.h"
 
 DEFINE_LOG_CATEGORY(LogMonolithSource);
 

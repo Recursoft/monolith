@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 
+class FJsonObject;
 struct FMonolithActionResult;
 class FMonolithToolRegistry;
 

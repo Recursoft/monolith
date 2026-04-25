@@ -4,6 +4,7 @@
 #include "MonolithParamSchema.h"
 #include "MonolithAssetUtils.h"
 #include "UObject/UnrealType.h"
+#include "UObject/TextProperty.h"
 #include "Engine/Blueprint.h"
 #include "Kismet2/BlueprintEditorUtils.h"
 #include "Serialization/JsonWriter.h"

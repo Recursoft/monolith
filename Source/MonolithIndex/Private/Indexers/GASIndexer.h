@@ -2,6 +2,9 @@
 
 #include "MonolithIndexer.h"
 
+class FJsonObject;
+class FJsonValue;
+
 /**
  * Indexes Gameplay Ability System assets: GameplayAbilities, GameplayEffects,
  * AttributeSets, and GameplayCues. Extracts tag containers, modifiers,

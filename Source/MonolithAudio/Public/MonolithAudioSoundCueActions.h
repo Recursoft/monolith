@@ -5,6 +5,7 @@
 class FMonolithToolRegistry;
 struct FMonolithActionResult;
 class FJsonObject;
+class FJsonValue;
 class USoundCue;
 class USoundNode;
 

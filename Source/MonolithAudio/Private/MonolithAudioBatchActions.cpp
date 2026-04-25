@@ -12,6 +12,7 @@
 
 #include "AssetToolsModule.h"
 #include "IAssetTools.h"
+#include "AssetRegistry/AssetData.h"
 #include "AssetRegistry/IAssetRegistry.h"
 #include "Dom/JsonObject.h"
 #include "Dom/JsonValue.h"

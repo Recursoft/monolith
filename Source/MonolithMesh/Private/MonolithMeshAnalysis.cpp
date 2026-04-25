@@ -1,6 +1,7 @@
 #include "MonolithMeshAnalysis.h"
 #include "MonolithMeshUtils.h"
 
+#include "Engine/HitResult.h"
 #include "Engine/World.h"
 #include "CollisionQueryParams.h"
 #include "NavigationSystem.h"

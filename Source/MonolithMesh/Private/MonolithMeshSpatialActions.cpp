@@ -5,6 +5,8 @@
 
 #include "Engine/StaticMesh.h"
 #include "Engine/StaticMeshActor.h"
+#include "StaticMeshResources.h"
+#include "PhysicalMaterials/PhysicalMaterial.h"
 #include "Engine/BlockingVolume.h"
 #include "Engine/Light.h"
 #include "Engine/World.h"

@@ -16,6 +16,8 @@
 #include "MonolithAIIndexer.h"
 #include "MonolithIndexSubsystem.h"
 #include "Editor.h"
+#include "Modules/ModuleManager.h"
+#include "Misc/CoreDelegates.h"
 
 DEFINE_LOG_CATEGORY(LogMonolithAI);
 

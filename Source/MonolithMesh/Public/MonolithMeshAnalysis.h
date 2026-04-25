@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 
+class FJsonValue;
 class UWorld;
 class UNavigationSystemV1;
 class ANavigationData;

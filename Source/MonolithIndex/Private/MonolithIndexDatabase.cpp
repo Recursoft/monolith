@@ -2,6 +2,7 @@
 #include "SQLiteDatabase.h"
 #include "Misc/Paths.h"
 #include "HAL/PlatformFileManager.h"
+#include "GenericPlatform/GenericPlatformFile.h"
 #include "Serialization/JsonWriter.h"
 #include "Serialization/JsonSerializer.h"
 

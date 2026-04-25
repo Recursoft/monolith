@@ -5,6 +5,8 @@
 #include "SQLiteDatabase.h"
 #include "MonolithIndexLog.h"
 
+class FJsonObject;
+
 struct FIndexedAsset
 {
 	int64 Id = 0;

@@ -3,6 +3,7 @@
 #include "AssetRegistry/AssetRegistryModule.h"
 #include "UObject/UObjectHash.h"
 #include "UObject/Package.h"
+#include "Misc/Paths.h"
 
 FString FMonolithAssetUtils::ResolveAssetPath(const FString& InPath)
 {

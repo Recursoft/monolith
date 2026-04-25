@@ -13,6 +13,8 @@
 #include "RigVMModel/Nodes/RigVMUnitNode.h"
 #include "Dom/JsonObject.h"
 #include "Dom/JsonValue.h"
+#include "Serialization/JsonSerializer.h"
+#include "Serialization/JsonWriter.h"
 #include "Editor.h"
 
 // ---------------------------------------------------------------------------

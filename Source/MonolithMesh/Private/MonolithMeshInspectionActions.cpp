@@ -10,6 +10,8 @@
 
 #include "Engine/StaticMesh.h"
 #include "Engine/SkeletalMesh.h"
+#include "Engine/SkeletalMeshSocket.h"
+#include "Animation/Skeleton.h"
 #include "MeshDescription.h"
 #include "PhysicsEngine/BodySetup.h"
 #include "Rendering/SkeletalMeshRenderData.h"

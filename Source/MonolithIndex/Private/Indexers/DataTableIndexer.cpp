@@ -1,11 +1,14 @@
 #include "Indexers/DataTableIndexer.h"
 #include "MonolithSettings.h"
 #include "Engine/DataTable.h"
+#include "AssetRegistry/AssetData.h"
 #include "AssetRegistry/AssetRegistryModule.h"
 #include "AssetRegistry/IAssetRegistry.h"
 #include "UObject/UnrealType.h"
+#include "UObject/TextProperty.h"
 #include "Serialization/JsonWriter.h"
 #include "Serialization/JsonSerializer.h"
+#include "Policies/CondensedJsonPrintPolicy.h"
 
 bool FDataTableIndexer::IndexAsset(const FAssetData& AssetData, UObject* LoadedAsset, FMonolithIndexDatabase& DB, int64 AssetId)
 {

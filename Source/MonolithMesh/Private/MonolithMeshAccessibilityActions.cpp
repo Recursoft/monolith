@@ -8,6 +8,8 @@
 #include "EngineUtils.h"
 #include "GameFramework/Actor.h"
 #include "Components/PrimitiveComponent.h"
+#include "Materials/MaterialInterface.h"
+#include "PhysicalMaterials/PhysicalMaterial.h"
 #include "CollisionQueryParams.h"
 #include "NavigationSystem.h"
 #include "NavigationData.h"

@@ -9,6 +9,10 @@
 #include "SocketSubsystem.h"
 #include "Sockets.h"
 #include "IPAddress.h"
+#include "Serialization/JsonSerializer.h"
+#include "Serialization/JsonReader.h"
+#include "Serialization/JsonWriter.h"
+#include "Policies/CondensedJsonPrintPolicy.h"
 
 FMonolithHttpServer::FMonolithHttpServer()
 {

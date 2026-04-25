@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "MonolithToolRegistry.h"
 
+class AActor;
 class ABlockingVolume;
 class UMaterialInstanceDynamic;
 

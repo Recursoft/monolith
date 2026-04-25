@@ -1,6 +1,7 @@
 #include "Indexers/LevelIndexer.h"
 #include "MonolithMemoryHelper.h"
 #include "MonolithSettings.h"
+#include "AssetRegistry/AssetData.h"
 #include "AssetRegistry/AssetRegistryModule.h"
 #include "AssetRegistry/IAssetRegistry.h"
 #include "Editor.h"
@@ -11,8 +12,10 @@
 #include "Components/ActorComponent.h"
 #include "Serialization/JsonWriter.h"
 #include "Serialization/JsonSerializer.h"
+#include "Policies/CondensedJsonPrintPolicy.h"
 #include "UObject/Package.h"
 #include "WorldPartition/WorldPartition.h"
+#include "UObject/UObjectGlobals.h"
 
 bool FLevelIndexer::IndexAsset(const FAssetData& AssetData, UObject* LoadedAsset, FMonolithIndexDatabase& DB, int64 AssetId)
 {

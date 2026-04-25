@@ -19,7 +19,9 @@
 #include "TextureResource.h"
 
 // Highlight material
+#include "Materials/Material.h"
 #include "Materials/MaterialInstanceDynamic.h"
+#include "MaterialDomain.h"
 #include "Components/StaticMeshComponent.h"
 
 // JSON / file I/O

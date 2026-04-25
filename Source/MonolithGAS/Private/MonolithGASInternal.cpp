@@ -9,7 +9,9 @@
 #include "GameplayEffect.h"
 #include "EngineUtils.h"
 #include "UObject/Package.h"
+#include "AssetRegistry/AssetData.h"
 #include "AssetRegistry/AssetRegistryModule.h"
+#include "Misc/App.h"
 
 namespace MonolithGAS
 {

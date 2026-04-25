@@ -2,6 +2,7 @@
 #include "Serialization/JsonSerializer.h"
 #include "Serialization/JsonWriter.h"
 #include "Serialization/JsonReader.h"
+#include "Policies/CondensedJsonPrintPolicy.h"
 
 DEFINE_LOG_CATEGORY(LogMonolith);
 

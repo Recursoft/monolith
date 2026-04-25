@@ -25,6 +25,7 @@
 #include "Engine/StaticMesh.h"
 #include "Engine/StaticMeshActor.h"
 #include "Engine/World.h"
+#include "Components/StaticMeshComponent.h"
 #include "Editor.h"
 
 #include "Dom/JsonObject.h"

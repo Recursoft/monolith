@@ -10,6 +10,7 @@
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
 #include "HAL/PlatformFileManager.h"
+#include "Containers/Queue.h"
 
 DECLARE_LOG_CATEGORY_EXTERN(LogMonolithFloorPlan, Log, All);
 DEFINE_LOG_CATEGORY(LogMonolithFloorPlan);

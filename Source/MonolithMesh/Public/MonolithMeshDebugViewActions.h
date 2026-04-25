@@ -4,6 +4,9 @@
 #include "MonolithToolRegistry.h"
 #include "MonolithMeshSpatialRegistry.h"
 
+class AActor;
+class UWorld;
+
 /**
  * SP9: Daredevil Debug View — 6 actions for inspecting procedural buildings.
  *

@@ -2,6 +2,9 @@
 
 #include "MonolithIndexer.h"
 
+class FJsonObject;
+class FJsonValue;
+
 /**
  * Indexes UDataAsset subclasses by serializing all UPROPERTY defaults to JSON.
  * Covers AbilitySets, PawnData, InputConfigs, and any custom DataAssets whose

@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "HAL/Runnable.h"
+#include "HAL/ThreadSafeBool.h"
 
 class FMonolithSourceDatabase;
 

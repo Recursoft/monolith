@@ -2,7 +2,11 @@
 
 #include "CoreMinimal.h"
 #include "EditorSubsystem.h"
+#include "AssetRegistry/AssetData.h"
 #include "Misc/AsyncTaskNotification.h"
+#include "HAL/Runnable.h"
+#include "HAL/RunnableThread.h"
+#include "Engine/TimerHandle.h"
 #include "MonolithIndexDatabase.h"
 #include "MonolithIndexer.h"
 #include "MonolithIndexSubsystem.generated.h"

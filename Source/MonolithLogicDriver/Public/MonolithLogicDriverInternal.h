@@ -1,6 +1,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "UObject/UnrealType.h"
+
+class FJsonObject;
+class UBlueprint;
+class UEdGraph;
+class UEdGraphNode;
 
 #if WITH_LOGICDRIVER
 

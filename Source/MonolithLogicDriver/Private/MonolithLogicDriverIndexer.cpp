@@ -3,7 +3,11 @@
 #if WITH_LOGICDRIVER
 
 #include "MonolithLogicDriverInternal.h"
+#include "AssetRegistry/ARFilter.h"
+#include "AssetRegistry/AssetData.h"
 #include "AssetRegistry/AssetRegistryModule.h"
+#include "AssetRegistry/IAssetRegistry.h"
+#include "Modules/ModuleManager.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogMonolithLDIndexer, Log, All);
 

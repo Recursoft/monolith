@@ -19,10 +19,12 @@
 #include "GameplayTagsEditorModule.h"
 #include "GameplayAbilitySpec.h"
 #include "Misc/FileHelper.h"
+#include "Misc/App.h"
 #include "Misc/ConfigCacheIni.h"
 #include "Misc/PackageName.h"
 #include "HAL/PlatformFileManager.h"
 #include "UObject/SavePackage.h"
+#include "UObject/UObjectIterator.h"
 #include "Interfaces/IPluginManager.h"
 
 

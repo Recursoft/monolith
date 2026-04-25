@@ -21,6 +21,7 @@
 #include "ObjectTools.h"
 #include "UObject/Package.h"
 #include "UObject/SavePackage.h"
+#include "Editor.h"
 #include "ScopedTransaction.h"
 
 // ============================================================

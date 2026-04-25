@@ -2,6 +2,7 @@
 #include "MonolithToolRegistry.h"
 #include "MonolithSettings.h"
 #include "MonolithComboGraphActions.h"
+#include "Modules/ModuleManager.h"
 
 DEFINE_LOG_CATEGORY(LogMonolithComboGraph);
 
