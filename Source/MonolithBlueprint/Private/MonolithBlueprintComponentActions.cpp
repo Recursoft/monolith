@@ -5,6 +5,7 @@
 #include "Engine/SimpleConstructionScript.h"
 #include "Engine/SCS_Node.h"
 #include "Kismet2/BlueprintEditorUtils.h"
+#include "Kismet2/KismetEditorUtilities.h"
 
 // ---------------------------------------------------------------------------
 // Registration
@@ -464,6 +465,7 @@ FMonolithActionResult FMonolithBlueprintComponentActions::HandleSetComponentProp
 
 	// 1) BP-added components live on the SimpleConstructionScript as USCS_Node.
 	UActorComponent* Template = nullptr;
+	bool bIsNativeCDOTemplate = false;
 	if (BP->SimpleConstructionScript)
 	{
 		if (USCS_Node* Node = FindSCSNodeByName(BP->SimpleConstructionScript, FName(*CompName)))
@@ -474,7 +476,9 @@ FMonolithActionResult FMonolithBlueprintComponentActions::HandleSetComponentProp
 
 	// 2) Fallback: native inherited components (declared in the C++ parent class)
 	// don't appear in the SCS — they live as default subobjects on the CDO.
-	// Writing to the CDO subobject persists in the saved BP.
+	// Writing to the CDO subobject persists in the saved BP via standard CDO
+	// delta-vs-archetype serialization, but only if the BP is recompiled so the
+	// override lands in the BPGC class layout — see persistence path below.
 	if (!Template && BP->GeneratedClass)
 	{
 		if (UObject* CDO = BP->GeneratedClass->GetDefaultObject(/*bCreateIfNeeded=*/false))
@@ -490,6 +494,7 @@ FMonolithActionResult FMonolithBlueprintComponentActions::HandleSetComponentProp
 					    Comp->GetFName() == FName(*CompName))
 					{
 						Template = Comp;
+						bIsNativeCDOTemplate = true;
 						break;
 					}
 				}
@@ -529,6 +534,14 @@ FMonolithActionResult FMonolithBlueprintComponentActions::HandleSetComponentProp
 
 	// Record the change for undo + ensure the CDO subobject is serialized on save.
 	Template->Modify();
+	if (bIsNativeCDOTemplate)
+	{
+		// Engine canonical pattern: subobject mutations on a Blueprint always pair
+		// Template->Modify() with Blueprint->Modify() so the BP joins the transaction
+		// and the package gets serialised correctly. SubobjectDataSubsystem.cpp does
+		// this at every mutation site (e.g. :997, :2476).
+		BP->Modify();
+	}
 
 	// For FObjectProperty, resolve the path → load the object → assign the pointer
 	// directly. ImportText is fragile for TObjectPtrs on a CDO subobject — it may
@@ -591,7 +604,24 @@ FMonolithActionResult FMonolithBlueprintComponentActions::HandleSetComponentProp
 		Template->PostEditChangeProperty(ChangeEvent);
 	}
 
-	FBlueprintEditorUtils::MarkBlueprintAsModified(BP);
+	if (bIsNativeCDOTemplate)
+	{
+		// Native-component CDO override: must bake into BPGC class layout or the
+		// save-time CDO delta-vs-archetype serialisation drops the override at
+		// load time. MarkBlueprintAsStructurallyModified runs a RegenerateSkeletonOnly
+		// compile (BlueprintEditorUtils.cpp:1856-1880); CompileBlueprint does the
+		// full BPGC recompile so SerializeDefaultObject (BlueprintGeneratedClass.cpp:725-905)
+		// sees the override in the class layout and writes it to disk.
+		FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(BP);
+		FKismetEditorUtilities::CompileBlueprint(BP);
+	}
+	else
+	{
+		// SCS-owned components are tracked subobjects of the BP archetype graph;
+		// the lighter mark + MarkPackageDirty is sufficient and avoids forcing a
+		// full recompile on every property edit.
+		FBlueprintEditorUtils::MarkBlueprintAsModified(BP);
+	}
 	BP->MarkPackageDirty();
 
 	// Re-export to reflect whatever UE actually stored — caller can diff old vs new.
